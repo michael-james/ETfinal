@@ -1,14 +1,24 @@
 Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual Studio 2008
 
-
+Project("{AB7D356C-ABE1-6F07-5469-BB90E552683D}") = "ET-Final-NewsMedia", "Assembly-CSharp.csproj", "{FFF0E126-347B-8AFB-B324-4904F7920895}"
+EndProject
+Project("{AB7D356C-ABE1-6F07-5469-BB90E552683D}") = "ET-Final-NewsMedia", "Assembly-CSharp-Editor.csproj", "{67E42DE8-D0D3-2A10-DEC8-6CB88C83A630}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-
+		{FFF0E126-347B-8AFB-B324-4904F7920895}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FFF0E126-347B-8AFB-B324-4904F7920895}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FFF0E126-347B-8AFB-B324-4904F7920895}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FFF0E126-347B-8AFB-B324-4904F7920895}.Release|Any CPU.Build.0 = Release|Any CPU
+		{67E42DE8-D0D3-2A10-DEC8-6CB88C83A630}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{67E42DE8-D0D3-2A10-DEC8-6CB88C83A630}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{67E42DE8-D0D3-2A10-DEC8-6CB88C83A630}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{67E42DE8-D0D3-2A10-DEC8-6CB88C83A630}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
