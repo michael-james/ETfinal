@@ -7,9 +7,9 @@ public class masterBubble : MonoBehaviour {
 	public int articleCnt;
 	public int angleStart;
 	public int angleEnd;
-	public int radius;
+	public double radius;
 	private int totalArc;
-	private double unitArc;
+	private float unitArc;
 	public GameObject objToMake;
 
 	// Use this for initialization
@@ -17,7 +17,7 @@ public class masterBubble : MonoBehaviour {
 		articleCnt = myMaterials.Length;
 		angleStart = 0;
 		angleEnd = 360;
-		radius = 2;
+		radius = 1;
 		updateAngle (angleStart, angleEnd);
 		int levels = 2;
 
@@ -41,7 +41,7 @@ public class masterBubble : MonoBehaviour {
 		angleStart = start;
 		angleEnd = end;
 		totalArc = angleEnd - angleStart;
-		unitArc = 1.0 * totalArc / ((articleCnt / 2) - 1);
+		unitArc = 1.0f * totalArc / ((articleCnt / 2));
 //		print ("new!");
 //		print (articleCnt);
 //		print (totalArc);
@@ -49,17 +49,19 @@ public class masterBubble : MonoBehaviour {
 	}
 
 	void createArticle (int level, int order) {
-		double myAngle = unitArc * order;
+		float myAngle = unitArc * order + (level * (unitArc / 2));
 		print (myAngle);
 
-		var o = radius * Mathf.Sin ((float)myAngle * Mathf.Deg2Rad);
-		var a = radius * Mathf.Cos ((float)myAngle * Mathf.Deg2Rad);
+		print (radius);
+		var o = (float)radius * Mathf.Sin ((float)myAngle * Mathf.Deg2Rad);
+		var a = (float)radius * Mathf.Cos ((float)myAngle * Mathf.Deg2Rad);
 
 //		transform.localPosition = new Vector3(0, 0, 0);
 		var mypos = this.transform.position;
 //		print (mypos);
-		print ("o: " + o + ", a:" + a);
-		print ("x: " + (mypos.x + o) + ", y:" + mypos.y + 2.0f + ", z:" + mypos.z + a);
-		Instantiate(objToMake, new Vector3(mypos.x + o, mypos.y + level * 1.0f, mypos.z + a), Quaternion.identity, this.transform);
+//		print ("o: " + o + ", a:" + a);
+//		print ("x: " + (mypos.x + o) + ", y:" + mypos.y + 2.0f + ", z:" + mypos.z + a);
+		var newArticle = Instantiate(objToMake, new Vector3(mypos.x + o, mypos.y + level * 1.0f, mypos.z + a), Quaternion.Euler(0, myAngle + Mathf.PI/2, Mathf.PI/2), this.transform);
+		newArticle.name = "article" + level + "" + order;
 	}
 }
