@@ -21,7 +21,8 @@ public class masterPlay : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		if ((bub1start != bub1startPrev) || (bub1end != bub1endPrev)) {
-			bub1script.updateAngle(bub1start, bub1end);
+//			bub1script.updateAngle(bub1start, bub1end);
+//			bub1script.updateArticles();
 		}
 
 		bub1startPrev = bub1start;
