@@ -38,7 +38,7 @@ public class masterBubble : MonoBehaviour {
 		angleStart = start;
 		angleEnd = end;
 		totalArc = angleEnd - angleStart;
-		float inc = 0.05f;
+		float inc = 0.1f;
 		if ((totalArc < 360) && (extraVal <= (1 + inc)) && (totalArc < totalArcPrev)) {
 			extraVal = extraVal + inc;
 //			print ("over!");
@@ -49,6 +49,7 @@ public class masterBubble : MonoBehaviour {
 			// do nothing
 			}
 		}
+			
 		var extraShift = Mathf.Lerp (0, 0.5f, extraVal);
 		unitArc = 1.0f * totalArc / ((articleCnt / 2) - extraShift);
 		print (totalArc + " " + extraVal + " " + extraShift + " " + unitArc);
