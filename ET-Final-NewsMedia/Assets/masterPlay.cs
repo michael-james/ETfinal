@@ -5,8 +5,6 @@ using System.Collections.Generic;
 public class masterPlay : MonoBehaviour {
 	public int startOrig;
 	public int endOrig;
-	public masterBubble bub1script;
-	public masterBubble bub2script;
 	private int startPrev;
 	private int endPrev;
 
@@ -16,30 +14,26 @@ public class masterPlay : MonoBehaviour {
 
 	bool isTriggered = false;
 
+	GameObject bubCtr;
+	GameObject bubOpp;
+	masterBubble bubCtrScript;
+	masterBubble bubOppScript;
 	Vector3 bubCtrPos;
-	GameObject bub1;
-	GameObject bub2;
-	Vector3 bub1OrigPos;
-	Vector3 bub2OrigPos;
+	Vector3 bubOppOrigPos;
 
 	private int toggleCount;
 
 	public List<GameObject> bubbles = new List<GameObject>();
+	public bool done;
 
 	// Use this for initialization
 	void Start () {
 		startOrig = 0;
 		endOrig = 360;
 
-		GameObject bubC = GameObject.Find("BubbleCenter");
-		bubCtrPos = bubC.transform.position;
-
-		bub1 = GameObject.Find("BubbleAuto1");
-		bub1script = (masterBubble) bub1.GetComponent(typeof(masterBubble));
-		bub1OrigPos = bub1.transform.position;
-		bub2 = GameObject.Find("BubbleAuto2");
-		bub2script = (masterBubble) bub2.GetComponent(typeof(masterBubble));
-		bub2OrigPos = bub2.transform.position;
+		bubCtr = GameObject.Find("BubbleC");
+		bubCtrScript = (masterBubble) bubCtr.GetComponent(typeof(masterBubble));
+		bubCtrPos = bubCtr.transform.position;
 
 		toggleCount = 0;
 
@@ -51,7 +45,9 @@ public class masterPlay : MonoBehaviour {
 				bubbles.Add (gameObj);
 			}
 		}
-		print(bubbles);
+
+		pickOpp ();
+		done = true;
 	}
 	
 	// Update is called once per frame
@@ -72,11 +68,13 @@ public class masterPlay : MonoBehaviour {
 			}
 			if (posLerp > 0) {
 				posLerp -= posInc;
+			} else {
+				done = true;
 			}
 		}
 
 		if (Input.GetKeyDown ("space")) {
-			toggleAngle ();
+			action ();
 		}
 
 		if (Input.GetKeyDown ("r")) {
@@ -87,25 +85,23 @@ public class masterPlay : MonoBehaviour {
 		var startNow = startOrig + angleOff;
 		var endNow = endOrig - angleOff;
 		if ((startNow != startPrev) || (endNow != endPrev)) {
-			bub1script.updateAngle(startNow, endNow);
-			bub1script.updateArticles ();
-			bub2script.updateAngle(startNow, endNow);
-			bub2script.updateArticles ();
+			bubCtrScript.updateAngle(startNow, endNow);
+			bubCtrScript.updateArticles ();
+			bubOppScript.updateAngle(startNow, endNow);
+			bubOppScript.updateArticles ();
 		}
 
 		startPrev = startNow;
 		endPrev = endNow;
 
-		bub1.transform.position = Vector3.Lerp (bub1OrigPos, bubCtrPos, posLerp);
-		bub2.transform.position = Vector3.Lerp (bub2OrigPos, bubCtrPos, posLerp);
-//		print (posLerp);
+		bubOpp.transform.position = Vector3.Lerp (bubOppOrigPos, bubCtrPos, posLerp);
 	}
 
 	void LateUpdate () {
 		GvrViewer.Instance.UpdateState();
 		HandleTrigger();
 		if (isTriggered)
-			toggleAngle ();
+			action ();
 	}
 
 	private void HandleTrigger() {
@@ -127,6 +123,7 @@ public class masterPlay : MonoBehaviour {
 			open = false;
 		} else {
 			open = true;
+			bubCtr.transform.rotation = Quaternion.LookRotation (bubOppOrigPos);
 		}
 
 		toggleCount += 1;
@@ -134,13 +131,26 @@ public class masterPlay : MonoBehaviour {
 		int rigidThresh = 5;
 		print ("Toggle Count: " + toggleCount);
 		if (toggleCount == rigidThresh) {
-			rigid ();
+//			rigid ();
 		}
 	}
 
 	void rigid() {
-		bub1script.addRigid ();
-		bub2script.addRigid ();
+		bubOppScript.addRigid ();
+	}
+
+	void pickOpp () {
+		bubOpp = bubbles[Random.Range(0, bubbles.Count)];
+		bubOppScript = (masterBubble) bubOpp.GetComponent(typeof(masterBubble));
+		bubOppOrigPos = bubOpp.transform.position;
+	}
+
+	void action () {
+		if (done) {
+			pickOpp ();
+			done = false;
+		}
+		toggleAngle ();
 	}
 
 //	void scratch () {

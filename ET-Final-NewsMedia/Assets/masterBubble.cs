@@ -30,6 +30,7 @@ public class masterBubble : MonoBehaviour {
 		artPrnt = new GameObject("Articles");
 		artPrnt.transform.parent = transform;
 
+//		print (this.name);
 		materials = Resources.LoadAll("ProTrump/Materials");
 //		print(materials.Length);
 		createArticles ();
@@ -91,6 +92,8 @@ public class masterBubble : MonoBehaviour {
 
 				Material material = (Material)materials[Random.Range(0, materials.Length)];
 				rend.material = material;
+				print (rend.material);
+//				print (material.name);
 			}
 		}
 	}

@@ -11,7 +11,7 @@ public class createMaterials : MonoBehaviour {
 	void Start () {
 		// Create a simple material asset
 
-		Shader shader = Shader.Find ("Specular");
+		Shader shader = Shader.Find ("Standard");
 		textures = Resources.LoadAll("ProTrump/Textures");
 //		print(textures.Length);
 
