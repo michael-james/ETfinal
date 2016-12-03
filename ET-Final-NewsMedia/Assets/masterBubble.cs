@@ -156,7 +156,8 @@ public class masterBubble : MonoBehaviour {
 			for (int l = 0; l < levels; l++) {
 				for (int o = 0; o < (articleCnt / 2); o++) {
 					GameObject cArt = artPrnt.transform.GetChild (l * (articleCnt / 2) + o).gameObject;
-					Rigidbody gameObjectsRigidBody = cArt.AddComponent<Rigidbody> (); // Add the rigidbody.
+					cArt.AddComponent<Rigidbody> ();
+//					Rigidbody gameObjectsRigidBody = cArt.AddComponent<Rigidbody> (); // Add the rigidbody.
 //					gameObjectsRigidBody.mass = 5; // Set the GO's mass to 5 via the Rigidbody.
 				}
 			}

@@ -25,6 +25,7 @@ public class masterPlay : MonoBehaviour {
 
 	public List<GameObject> bubbles = new List<GameObject>();
 	public bool done;
+	public int current;
 
 	// Use this for initialization
 	void Start () {
@@ -36,6 +37,7 @@ public class masterPlay : MonoBehaviour {
 		bubCtrPos = bubCtr.transform.position;
 
 		toggleCount = 0;
+		current = 0;
 
 		foreach(GameObject gameObj in GameObject.FindObjectsOfType<GameObject>())
 		{
@@ -46,8 +48,15 @@ public class masterPlay : MonoBehaviour {
 			}
 		}
 
+		for (int i = 0; i < bubbles.Count; i++) {
+			GameObject temp = bubbles[i];
+			int randomIndex = Random.Range(i, bubbles.Count);
+			bubbles[i] = bubbles[randomIndex];
+			bubbles[randomIndex] = temp;
+		}
+
 		pickOpp ();
-		done = true;
+		done = false;
 	}
 	
 	// Update is called once per frame
@@ -69,6 +78,7 @@ public class masterPlay : MonoBehaviour {
 			if (posLerp > 0) {
 				posLerp -= posInc;
 			} else {
+				rigid ();
 				done = true;
 			}
 		}
@@ -95,6 +105,10 @@ public class masterPlay : MonoBehaviour {
 		endPrev = endNow;
 
 		bubOpp.transform.position = Vector3.Lerp (bubOppOrigPos, bubCtrPos, posLerp);
+
+		if ((current == bubbles.Count) && (done)) {
+			bubCtrScript.addRigid ();
+		}
 	}
 
 	void LateUpdate () {
@@ -140,17 +154,22 @@ public class masterPlay : MonoBehaviour {
 	}
 
 	void pickOpp () {
-		bubOpp = bubbles[Random.Range(0, bubbles.Count)];
+		bubOpp = bubbles [current];//bubbles[Random.Range(0, bubbles.Count)];
 		bubOppScript = (masterBubble) bubOpp.GetComponent(typeof(masterBubble));
 		bubOppOrigPos = bubOpp.transform.position;
+		current += 1;
 	}
 
 	void action () {
-		if (done) {
-			pickOpp ();
-			done = false;
+		if (current < bubbles.Count) {
+			if (done) {
+				pickOpp ();
+				done = false;
+			}
+			toggleAngle ();
+		} else if (current == bubbles.Count) {
+			toggleAngle ();
 		}
-		toggleAngle ();
 	}
 
 //	void scratch () {
