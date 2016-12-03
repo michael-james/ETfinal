@@ -9,59 +9,101 @@ public class masterBubble : MonoBehaviour {
 	public int angleEnd;
 	public double radius;
 	private int totalArc;
+	private int totalArcPrev;
 	private float unitArc;
 	public GameObject objToMake;
+	private int levels;
+	private float extraVal = 0f;
 
 	// Use this for initialization
 	void Start () {
-		articleCnt = myMaterials.Length;
+		articleCnt = 12; //myMaterials.Length;
 		angleStart = 0;
 		angleEnd = 360;
-		radius = 1;
+		radius = 2.75;
 		updateAngle (angleStart, angleEnd);
-		int levels = 2;
+		levels = 2;
 
-		for(int i = 0; i < levels; i++)
-		{
-			for(int j = 0; j < (articleCnt / 2); j++)
-			{
-				createArticle (i, j);
-			}
-		}
+		createArticles ();
+
+		//gameObject.renderer.material = myMaterials[random.Next(0,myMaterials.Length)];
 	}
 	
 	// Update is called once per frame
 	void Update () {
-
-
-		//gameObject.renderer.material = myMaterials[random.Next(0,myMaterials.Length)];
+		
 	}
 
 	public void updateAngle (int start, int end) {
 		angleStart = start;
 		angleEnd = end;
 		totalArc = angleEnd - angleStart;
-		unitArc = 1.0f * totalArc / ((articleCnt / 2));
-//		print ("new!");
-//		print (articleCnt);
-//		print (totalArc);
-//		print (unitArc);
+		float inc = 0.05f;
+		if ((totalArc < 360) && (extraVal <= (1 + inc)) && (totalArc < totalArcPrev)) {
+			extraVal = extraVal + inc;
+//			print ("over!");
+		} else {
+			if (extraVal >= inc) {
+				extraVal = extraVal - inc;
+			} else {
+			// do nothing
+			}
+		}
+		var extraShift = Mathf.Lerp (0, 0.5f, extraVal);
+		unitArc = 1.0f * totalArc / ((articleCnt / 2) - extraShift);
+		print (totalArc + " " + extraVal + " " + extraShift + " " + unitArc);
+		totalArcPrev = totalArc;
 	}
 
-	void createArticle (int level, int order) {
-		float myAngle = unitArc * order + (level * (unitArc / 2));
-		print (myAngle);
+	void createArticles () {
+		for(int l = 0; l < levels; l++)
+		{
+			for(int o = 0; o < (articleCnt / 2); o++)
+			{
+				float myAngle = calcMyAngle (l, o);
 
-		print (radius);
-		var o = (float)radius * Mathf.Sin ((float)myAngle * Mathf.Deg2Rad);
-		var a = (float)radius * Mathf.Cos ((float)myAngle * Mathf.Deg2Rad);
+				var newArticle = Instantiate(
+					objToMake,
+					calcPos(myAngle, l),
+					calcRot(myAngle),
+					this.transform);
+				newArticle.name = "article" + l + "" + o;
+			}
+		}
+	}
 
-//		transform.localPosition = new Vector3(0, 0, 0);
-		var mypos = this.transform.position;
-//		print (mypos);
-//		print ("o: " + o + ", a:" + a);
-//		print ("x: " + (mypos.x + o) + ", y:" + mypos.y + 2.0f + ", z:" + mypos.z + a);
-		var newArticle = Instantiate(objToMake, new Vector3(mypos.x + o, mypos.y + level * 1.0f, mypos.z + a), Quaternion.Euler(0, myAngle + Mathf.PI/2, Mathf.PI/2), this.transform);
-		newArticle.name = "article" + level + "" + order;
+	public void updateArticles () {
+		for(int l = 0; l < levels; l++)
+		{
+			for(int o = 0; o < (articleCnt / 2); o++)
+			{
+				Transform cArt = this.gameObject.transform.GetChild (l * (articleCnt / 2) + o);
+
+				float myAngle = calcMyAngle (l, o);
+
+				cArt.transform.position = calcPos (myAngle, l);
+				cArt.transform.rotation = calcRot (myAngle);
+			}
+		}
+	}
+
+	// article calculations
+
+	float calcMyAngle (int level, int order) {
+		float myYRot = transform.eulerAngles.y;
+		float myAngle = angleStart + unitArc * order + (level * (unitArc / 2) + myYRot);
+		return myAngle;
+	}
+
+	Vector3 calcPos (float myAngle, int level) {
+		Vector3 mypos = transform.position;
+
+		var opp = (float)radius * Mathf.Sin ((float)myAngle * Mathf.Deg2Rad);
+		var adj = (float)radius * Mathf.Cos ((float)myAngle * Mathf.Deg2Rad);
+		return new Vector3 (mypos.x + opp, mypos.y + level * 1.0f, mypos.z + adj);
+	}
+
+	Quaternion calcRot (float myAngle) {
+		return Quaternion.Euler(+ 0, myAngle + Mathf.PI/2, Mathf.PI/2);
 	}
 }
