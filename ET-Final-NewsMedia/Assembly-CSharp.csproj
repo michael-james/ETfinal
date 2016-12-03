@@ -91,7 +91,9 @@
      <Compile Include="Assets\GoogleVR\Scripts\Utilities\GvrFPS.cs" />
      <Compile Include="Assets\GoogleVR\Scripts\Utilities\GvrIntent.cs" />
      <Compile Include="Assets\RotateAround.cs" />
+     <Compile Include="Assets\articleVars.cs" />
      <Compile Include="Assets\changeColor.cs" />
+     <Compile Include="Assets\createMaterials.cs" />
      <Compile Include="Assets\masterBubble-fancy.cs" />
      <Compile Include="Assets\masterBubble.cs" />
      <Compile Include="Assets\masterPlay.cs" />

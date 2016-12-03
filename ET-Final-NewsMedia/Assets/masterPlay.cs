@@ -1,38 +1,77 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 public class masterPlay : MonoBehaviour {
-	public int bubstartOrig;
-	public int bubendOrig;
+	public int startOrig;
+	public int endOrig;
 	public masterBubble bub1script;
-	private int bub1startPrev;
-	private int bub1endPrev;
+	public masterBubble bub2script;
+	private int startPrev;
+	private int endPrev;
 
-	private bool open;
-	private float lerpVal;
+	private bool open = false;
+	private float angleLerp;
+	private float posLerp;
 
 	bool isTriggered = false;
 
+	Vector3 bubCtrPos;
+	GameObject bub1;
+	GameObject bub2;
+	Vector3 bub1OrigPos;
+	Vector3 bub2OrigPos;
+
+	private int toggleCount;
+
+	public List<GameObject> bubbles = new List<GameObject>();
+
 	// Use this for initialization
 	void Start () {
-		bubstartOrig = 0;
-		bubendOrig = 360;
+		startOrig = 0;
+		endOrig = 360;
 
-		GameObject bub1 = GameObject.Find("BubbleAuto1");
+		GameObject bubC = GameObject.Find("BubbleCenter");
+		bubCtrPos = bubC.transform.position;
+
+		bub1 = GameObject.Find("BubbleAuto1");
 		bub1script = (masterBubble) bub1.GetComponent(typeof(masterBubble));
+		bub1OrigPos = bub1.transform.position;
+		bub2 = GameObject.Find("BubbleAuto2");
+		bub2script = (masterBubble) bub2.GetComponent(typeof(masterBubble));
+		bub2OrigPos = bub2.transform.position;
+
+		toggleCount = 0;
+
+		foreach(GameObject gameObj in GameObject.FindObjectsOfType<GameObject>())
+		{
+//			print(gameObj.name.Substring(0, 10));
+			if ((gameObj.name.Length >= 10) && (gameObj.name.Substring(0, 10) == "BubbleAuto"))
+			{
+				bubbles.Add (gameObj);
+			}
+		}
+		print(bubbles);
 	}
 	
 	// Update is called once per frame
 	void Update () {
-		float inc = 0.1f;
+		float inc = 0.005f;
+		float posInc = 0.005f;
 
 		if (open) {
-			if (lerpVal > 0) {
-				lerpVal -= inc;
+			if (angleLerp < 1) {
+				angleLerp += inc;
+			}
+			if (posLerp < 1) {
+				posLerp += posInc;
 			}
 		} else {
-			if (lerpVal < 1) {
-				lerpVal += inc;
+			if (angleLerp > 0) {
+				angleLerp -= inc;
+			}
+			if (posLerp > 0) {
+				posLerp -= posInc;
 			}
 		}
 
@@ -40,16 +79,26 @@ public class masterPlay : MonoBehaviour {
 			toggleAngle ();
 		}
 
-		var angleOff = (int)Mathf.Lerp (0, 90, lerpVal);
-		var bub1start = bubstartOrig + angleOff;
-		var bub1end = bubendOrig - angleOff;
-		if ((bub1start != bub1startPrev) || (bub1end != bub1endPrev)) {
-			bub1script.updateAngle(bub1start, bub1end);
-			bub1script.updateArticles ();
+		if (Input.GetKeyDown ("r")) {
+			rigid ();
 		}
 
-		bub1startPrev = bub1start;
-		bub1endPrev = bub1end;
+		var angleOff = (int)Mathf.Lerp (0, 90, angleLerp);
+		var startNow = startOrig + angleOff;
+		var endNow = endOrig - angleOff;
+		if ((startNow != startPrev) || (endNow != endPrev)) {
+			bub1script.updateAngle(startNow, endNow);
+			bub1script.updateArticles ();
+			bub2script.updateAngle(startNow, endNow);
+			bub2script.updateArticles ();
+		}
+
+		startPrev = startNow;
+		endPrev = endNow;
+
+		bub1.transform.position = Vector3.Lerp (bub1OrigPos, bubCtrPos, posLerp);
+		bub2.transform.position = Vector3.Lerp (bub2OrigPos, bubCtrPos, posLerp);
+//		print (posLerp);
 	}
 
 	void LateUpdate () {
@@ -79,6 +128,19 @@ public class masterPlay : MonoBehaviour {
 		} else {
 			open = true;
 		}
+
+		toggleCount += 1;
+
+		int rigidThresh = 5;
+		print ("Toggle Count: " + toggleCount);
+		if (toggleCount == rigidThresh) {
+			rigid ();
+		}
+	}
+
+	void rigid() {
+		bub1script.addRigid ();
+		bub2script.addRigid ();
 	}
 
 //	void scratch () {
