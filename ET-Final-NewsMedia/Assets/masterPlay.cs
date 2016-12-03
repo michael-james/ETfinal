@@ -27,6 +27,8 @@ public class masterPlay : MonoBehaviour {
 	public bool done;
 	public int current;
 
+//	int triggersSince = 0;
+
 	// Use this for initialization
 	void Start () {
 		startOrig = 0;
@@ -109,6 +111,11 @@ public class masterPlay : MonoBehaviour {
 		if ((current == bubbles.Count) && (done)) {
 			bubCtrScript.addRigid ();
 		}
+
+//		if (triggersSince > 0) {
+//			print (triggersSince);
+//			triggersSince -= 1;
+//		}
 	}
 
 	void LateUpdate () {
@@ -121,9 +128,12 @@ public class masterPlay : MonoBehaviour {
 	private void HandleTrigger() {
 		// If trigger isn't already held.
 		if (!isTriggered) {
-			if (GvrViewer.Instance.Triggered || Input.GetMouseButtonDown(0)) {
+			if (GvrViewer.Instance.Triggered || Input.GetMouseButtonDown(0)) {//&& (triggersSince == 0)) {
+//			if (GvrViewer.Instance.Triggered || Input.GetMouseButtonDown(0)) {
 				// Trigger started.
 				isTriggered = true;
+//				triggersSince = 5;
+//				print ("TRIGGERED!");
 			}
 		}
 		else if (!GvrViewer.Instance.Triggered && !Input.GetMouseButton(0)) {
@@ -143,7 +153,7 @@ public class masterPlay : MonoBehaviour {
 		toggleCount += 1;
 
 		int rigidThresh = 5;
-		print ("Toggle Count: " + toggleCount);
+//		print ("Toggle Count: " + toggleCount);
 		if (toggleCount == rigidThresh) {
 //			rigid ();
 		}

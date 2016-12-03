@@ -244,7 +244,7 @@ GameObject:
   - 4: {fileID: 164000150}
   - 108: {fileID: 164000149}
   m_Layer: 0
-  m_Name: Directional Light (8)
+  m_Name: BubblePointLight
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -260,7 +260,7 @@ Light:
   serializedVersion: 7
   m_Type: 2
   m_Color: {r: 1, g: 0.5735294, b: 0.5735294, a: 1}
-  m_Intensity: 2.83
+  m_Intensity: 2.32
   m_Range: 2.56
   m_SpotAngle: 30
   m_CookieSize: 10
@@ -394,7 +394,7 @@ GameObject:
   - 4: {fileID: 246990336}
   - 108: {fileID: 246990337}
   m_Layer: 0
-  m_Name: Directional Light (7)
+  m_Name: BubblePointLight
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -423,7 +423,7 @@ Light:
   serializedVersion: 7
   m_Type: 2
   m_Color: {r: 0.5955882, g: 0.6485801, b: 1, a: 1}
-  m_Intensity: 2.83
+  m_Intensity: 2.32
   m_Range: 2.56
   m_SpotAngle: 30
   m_CookieSize: 10
@@ -1014,7 +1014,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 11414954, guid: 970dd4b9371394fb4890965f608d46fd, type: 2}
       propertyPath: vrModeEnabled
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 970dd4b9371394fb4890965f608d46fd, type: 2}
@@ -1142,7 +1142,7 @@ GameObject:
   - 4: {fileID: 893536369}
   - 108: {fileID: 893536370}
   m_Layer: 0
-  m_Name: Directional Light (8)
+  m_Name: BubblePointLight
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1171,7 +1171,7 @@ Light:
   serializedVersion: 7
   m_Type: 2
   m_Color: {r: 1, g: 0.5735294, b: 0.5735294, a: 1}
-  m_Intensity: 2.83
+  m_Intensity: 2.32
   m_Range: 2.56
   m_SpotAngle: 30
   m_CookieSize: 10
@@ -1222,7 +1222,7 @@ GameObject:
   - 4: {fileID: 918342600}
   - 108: {fileID: 918342601}
   m_Layer: 0
-  m_Name: Directional Light (7)
+  m_Name: BubblePointLight
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1251,7 +1251,7 @@ Light:
   serializedVersion: 7
   m_Type: 2
   m_Color: {r: 0.5955882, g: 0.6485801, b: 1, a: 1}
-  m_Intensity: 2.83
+  m_Intensity: 2.32
   m_Range: 2.56
   m_SpotAngle: 30
   m_CookieSize: 10
@@ -1491,7 +1491,7 @@ GameObject:
   - 4: {fileID: 1116548386}
   - 108: {fileID: 1116548387}
   m_Layer: 0
-  m_Name: Directional Light (7)
+  m_Name: BubblePointLight
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1520,7 +1520,7 @@ Light:
   serializedVersion: 7
   m_Type: 2
   m_Color: {r: 0.5955882, g: 0.6485801, b: 1, a: 1}
-  m_Intensity: 2.83
+  m_Intensity: 2.32
   m_Range: 2.56
   m_SpotAngle: 30
   m_CookieSize: 10
@@ -1645,7 +1645,7 @@ GameObject:
   - 4: {fileID: 1464241846}
   - 108: {fileID: 1464241847}
   m_Layer: 0
-  m_Name: Directional Light (7)
+  m_Name: BubblePointLight
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1674,7 +1674,7 @@ Light:
   serializedVersion: 7
   m_Type: 2
   m_Color: {r: 0.5955882, g: 0.6485801, b: 1, a: 1}
-  m_Intensity: 2.83
+  m_Intensity: 2.32
   m_Range: 2.56
   m_SpotAngle: 30
   m_CookieSize: 10
@@ -1725,7 +1725,7 @@ GameObject:
   - 4: {fileID: 1641300039}
   - 108: {fileID: 1641300040}
   m_Layer: 0
-  m_Name: Directional Light (7)
+  m_Name: BubblePointLight
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1754,7 +1754,7 @@ Light:
   serializedVersion: 7
   m_Type: 2
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_Intensity: 2.83
+  m_Intensity: 2.32
   m_Range: 2.56
   m_SpotAngle: 30
   m_CookieSize: 10
@@ -2076,7 +2076,7 @@ GameObject:
   - 4: {fileID: 1807426174}
   - 108: {fileID: 1807426175}
   m_Layer: 0
-  m_Name: Directional Light (8)
+  m_Name: BubblePointLight
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2105,7 +2105,7 @@ Light:
   serializedVersion: 7
   m_Type: 2
   m_Color: {r: 1, g: 0.5735294, b: 0.5735294, a: 1}
-  m_Intensity: 2.83
+  m_Intensity: 2.32
   m_Range: 2.56
   m_SpotAngle: 30
   m_CookieSize: 10
@@ -2354,7 +2354,7 @@ GameObject:
   - 4: {fileID: 2109225532}
   - 108: {fileID: 2109225533}
   m_Layer: 0
-  m_Name: Directional Light (8)
+  m_Name: BubblePointLight
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2383,7 +2383,7 @@ Light:
   serializedVersion: 7
   m_Type: 2
   m_Color: {r: 1, g: 0.5735294, b: 0.5735294, a: 1}
-  m_Intensity: 2.83
+  m_Intensity: 2.32
   m_Range: 2.56
   m_SpotAngle: 30
   m_CookieSize: 10

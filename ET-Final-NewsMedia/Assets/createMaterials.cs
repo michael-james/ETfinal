@@ -1,5 +1,9 @@
 ﻿using UnityEngine;
+
+#if UNITY_EDITOR
 using UnityEditor;
+#endif
+
 using System.Collections;
 
 public class createMaterials : MonoBehaviour {
@@ -9,8 +13,9 @@ public class createMaterials : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		// Create a simple material asset
 
+		#if UNITY_EDITOR
+		// Create a simple material asset
 		Shader shader = Shader.Find ("Standard");
 		textures = Resources.LoadAll("ProTrump/Textures");
 //		print(textures.Length);
@@ -25,6 +30,7 @@ public class createMaterials : MonoBehaviour {
 
 			AssetDatabase.CreateAsset (material, "Assets/Resources/ProTrump/Materials/" + material.name + ".mat");
 		}
+		#endif
 	}
 	
 	// Update is called once per frame
