@@ -1,12 +1,12 @@
 ﻿<Properties StartupItem="Assembly-CSharp.csproj">
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="Unity.Instance.Unity Editor" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/masterPlay.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/masterBubble.cs">
     <Files>
-      <File FileName="Assets/masterPlay.cs" Line="30" Column="26" />
-      <File FileName="Assets/masterBubble.cs" Line="18" Column="28" />
-      <File FileName="Assets/createMaterials.cs" Line="23" Column="34" />
-      <File FileName="Assets/changeColor.cs" Line="16" Column="51" />
+      <File FileName="Assets/Scripts/articleVars.cs" Line="5" Column="2" />
       <File FileName="Assets/GoogleVR/Legacy/Scripts/Internal/GvrPreRender.cs" Line="80" Column="28" />
+      <File FileName="Assets/Scripts/masterBubble.cs" Line="81" Column="18" />
+      <File FileName="Assets/Scripts/masterPlay.cs" Line="186" Column="51" />
+      <File FileName="Assets/Scripts/createMaterials.cs" Line="32" Column="4" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
